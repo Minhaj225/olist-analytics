@@ -1,0 +1,9 @@
+.env
+.venv/
+__pycache__/
+.pytest_cache/
+data/raw/*.csv
+data/profile.json
+dashboard/extracts/*.csv
+reports/figures/*.png
+.superpowers/
