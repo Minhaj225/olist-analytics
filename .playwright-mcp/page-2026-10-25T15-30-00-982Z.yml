@@ -1,0 +1,228 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]: Marketplace intelligence / Olist
+      - heading "Performance dashboard" [level=1] [ref=e5]
+      - paragraph [ref=e6]: Brazilian e-commerce · Delivered item revenue excludes freight
+    - generic [ref=e7]: January 2017 — August 2018
+  - main [ref=e8]:
+    - navigation "Dashboard pages" [ref=e9]:
+      - button "01 Executive overview" [ref=e10] [cursor=pointer]
+      - button "02 Delivery & satisfaction" [ref=e11] [cursor=pointer]
+      - button "03 Customers & products" [ref=e12] [cursor=pointer]
+    - generic [ref=e13]:
+      - generic [ref=e14]:
+        - text: From
+        - combobox "From" [ref=e15]:
+          - option "2017-01" [selected]
+          - option "2017-02"
+          - option "2017-03"
+          - option "2017-04"
+          - option "2017-05"
+          - option "2017-06"
+          - option "2017-07"
+          - option "2017-08"
+          - option "2017-09"
+          - option "2017-10"
+          - option "2017-11"
+          - option "2017-12"
+          - option "2018-01"
+          - option "2018-02"
+          - option "2018-03"
+          - option "2018-04"
+          - option "2018-05"
+          - option "2018-06"
+          - option "2018-07"
+          - option "2018-08"
+      - generic [ref=e16]:
+        - text: To
+        - combobox "To" [ref=e17]:
+          - option "2017-01"
+          - option "2017-02"
+          - option "2017-03"
+          - option "2017-04"
+          - option "2017-05"
+          - option "2017-06"
+          - option "2017-07"
+          - option "2017-08"
+          - option "2017-09"
+          - option "2017-10"
+          - option "2017-11"
+          - option "2017-12"
+          - option "2018-01"
+          - option "2018-02"
+          - option "2018-03"
+          - option "2018-04"
+          - option "2018-05"
+          - option "2018-06"
+          - option "2018-07"
+          - option "2018-08" [selected]
+      - generic [ref=e18]:
+        - text: Customer state
+        - combobox "Customer state" [ref=e19]:
+          - option "All states" [selected]
+          - option "AC"
+          - option "AL"
+          - option "AM"
+          - option "AP"
+          - option "BA"
+          - option "CE"
+          - option "DF"
+          - option "ES"
+          - option "GO"
+          - option "MA"
+          - option "MG"
+          - option "MS"
+          - option "MT"
+          - option "PA"
+          - option "PB"
+          - option "PE"
+          - option "PI"
+          - option "PR"
+          - option "RJ"
+          - option "RN"
+          - option "RO"
+          - option "RR"
+          - option "RS"
+          - option "SC"
+          - option "SE"
+          - option "SP"
+          - option "TO"
+      - generic [ref=e20]: Filters affect order, delivery, and review views. RFM, seller, cohort, and category views cover the full period.
+    - generic [ref=e21]:
+      - generic [ref=e23]:
+        - heading "Executive overview" [level=2] [ref=e24]
+        - paragraph [ref=e25]: Revenue, order volume, product mix, and geography
+      - generic [ref=e26]:
+        - generic [ref=e27]:
+          - generic [ref=e28]: Delivered revenue
+          - strong [ref=e29]: BRL 13,181,027.13
+          - text: Item price, BRL
+        - generic [ref=e30]:
+          - generic [ref=e31]: Delivered orders
+          - strong [ref=e32]: 96,211
+          - text: One row per order
+        - generic [ref=e33]:
+          - generic [ref=e34]: Average order value
+          - strong [ref=e35]: BRL 137.00
+          - text: Revenue / orders
+        - generic [ref=e36]:
+          - generic [ref=e37]: Late delivery rate
+          - strong [ref=e38]: 6.8%
+          - text: 96,203 known dates
+        - generic [ref=e39]:
+          - generic [ref=e40]: Average review
+          - strong [ref=e41]: 4.16 / 5
+          - text: Out of 5, reviewed orders
+      - generic [ref=e42]:
+        - generic [ref=e43]:
+          - heading "Monthly delivered revenue" [level=3] [ref=e44]
+          - paragraph [ref=e45]: BRL · Date and state filters apply
+          - img "monthly" [ref=e47]:
+            - generic [ref=e48]: "0"
+            - generic [ref=e49]: 246,941
+            - generic [ref=e50]: 493,883
+            - generic [ref=e51]: 740,824
+            - generic [ref=e52]: 987,765
+            - 'generic "2017-01-01: 111,798" [ref=e54]'
+            - 'generic "2017-02-01: 234,223" [ref=e55]'
+            - 'generic "2017-03-01: 359,199" [ref=e56]'
+            - 'generic "2017-04-01: 340,670" [ref=e57]'
+            - 'generic "2017-05-01: 489,338" [ref=e58]'
+            - 'generic "2017-06-01: 421,923" [ref=e59]'
+            - 'generic "2017-07-01: 481,605" [ref=e60]'
+            - 'generic "2017-08-01: 554,700" [ref=e61]'
+            - 'generic "2017-09-01: 607,400" [ref=e62]'
+            - 'generic "2017-10-01: 648,248" [ref=e63]'
+            - 'generic "2017-11-01: 987,765" [ref=e64]'
+            - 'generic "2017-12-01: 726,033" [ref=e65]'
+            - 'generic "2018-01-01: 924,645" [ref=e66]'
+            - 'generic "2018-02-01: 826,437" [ref=e67]'
+            - 'generic "2018-03-01: 953,356" [ref=e68]'
+            - 'generic "2018-04-01: 973,534" [ref=e69]'
+            - 'generic "2018-05-01: 977,545" [ref=e70]'
+            - 'generic "2018-06-01: 856,078" [ref=e71]'
+            - 'generic "2018-07-01: 867,953" [ref=e72]'
+            - 'generic "2018-08-01: 838,577" [ref=e73]'
+            - generic [ref=e74]: 2017-01
+            - generic [ref=e75]: 2017-04
+            - generic [ref=e76]: 2017-07
+            - generic [ref=e77]: 2017-10
+            - generic [ref=e78]: 2018-01
+            - generic [ref=e79]: 2018-04
+            - generic [ref=e80]: 2018-07
+        - generic [ref=e81]:
+          - heading "Top 10 categories" [level=3] [ref=e82]
+          - paragraph [ref=e83]: Exact item-category revenue · Full period
+          - generic [ref=e84]:
+            - generic [ref=e85]:
+              - generic "health_beauty" [ref=e86]: health beauty
+              - generic [ref=e89]: BRL 1,229,557.50
+            - generic [ref=e90]:
+              - generic "watches_gifts" [ref=e91]: watches gifts
+              - generic [ref=e94]: BRL 1,163,465.91
+            - generic [ref=e95]:
+              - generic "bed_bath_table" [ref=e96]: bed bath table
+              - generic [ref=e99]: BRL 1,022,955.77
+            - generic [ref=e100]:
+              - generic "sports_leisure" [ref=e101]: sports leisure
+              - generic [ref=e104]: BRL 952,840.40
+            - generic [ref=e105]:
+              - generic "computers_accessories" [ref=e106]: computers accessories
+              - generic [ref=e109]: BRL 888,055.59
+            - generic [ref=e110]:
+              - generic "furniture_decor" [ref=e111]: furniture decor
+              - generic [ref=e114]: BRL 706,237.17
+            - generic [ref=e115]:
+              - generic "housewares" [ref=e116]
+              - generic [ref=e119]: BRL 614,341.62
+            - generic [ref=e120]:
+              - generic "cool_stuff" [ref=e121]: cool stuff
+              - generic [ref=e124]: BRL 609,158.00
+            - generic [ref=e125]:
+              - generic "auto" [ref=e126]
+              - generic [ref=e129]: BRL 577,838.39
+            - generic [ref=e130]:
+              - generic "garden_tools" [ref=e131]: garden tools
+              - generic [ref=e134]: BRL 469,135.40
+        - generic [ref=e135]:
+          - heading "Revenue by state" [level=3] [ref=e136]
+          - paragraph [ref=e137]: Top 10 customer states · Order revenue
+          - generic [ref=e138]:
+            - generic [ref=e139]:
+              - generic "SP" [ref=e140]
+              - generic [ref=e143]: BRL 5,057,381.81
+            - generic [ref=e144]:
+              - generic "RJ" [ref=e145]
+              - generic [ref=e148]: BRL 1,751,414.46
+            - generic [ref=e149]:
+              - generic "MG" [ref=e150]
+              - generic [ref=e153]: BRL 1,547,967.86
+            - generic [ref=e154]:
+              - generic "RS" [ref=e155]
+              - generic [ref=e158]: BRL 726,453.92
+            - generic [ref=e159]:
+              - generic "PR" [ref=e160]
+              - generic [ref=e163]: BRL 663,093.13
+            - generic [ref=e164]:
+              - generic "SC" [ref=e165]
+              - generic [ref=e168]: BRL 504,472.07
+            - generic [ref=e169]:
+              - generic "BA" [ref=e170]
+              - generic [ref=e173]: BRL 493,109.27
+            - generic [ref=e174]:
+              - generic "DF" [ref=e175]
+              - generic [ref=e178]: BRL 294,653.94
+            - generic [ref=e179]:
+              - generic "GO" [ref=e180]
+              - generic [ref=e183]: BRL 282,219.20
+            - generic [ref=e184]:
+              - generic "ES" [ref=e185]
+              - generic [ref=e188]: BRL 267,873.56
+        - generic [ref=e189]:
+          - heading "Three-month revenue outlook" [level=3] [ref=e190]
+          - paragraph [ref=e191]: Static forecast; holdout MAPE 36.6% versus 43.0% seasonal naive
+          - img "Revenue history and three-month forecast" [ref=e192]
+          - paragraph [ref=e193]: The forecast does not respond to dashboard filters. Its shaded band is an approximate residual range, not a calibrated prediction interval.
+      - paragraph [ref=e194]: The full period contains 96,211 delivered orders. Eight lack delivery dates and are excluded from the late-rate denominator of 96,203.
+    - generic [ref=e195]: "Source: Olist public dataset · Aggregate-only dashboard · Built from the project’s verified January 2017–August 2018 extracts"
