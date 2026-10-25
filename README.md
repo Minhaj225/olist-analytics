@@ -2,7 +2,7 @@
 
 A reproducible analytics project that turns the [Brazilian E-Commerce Public Dataset by Olist](https://www.kaggle.com/olistbr/brazilian-ecommerce/home/) into a PostgreSQL warehouse, analysis-ready marts, statistical findings, a revenue forecast, and CSV extracts for a Tableau Public or Power BI dashboard. It is designed as a readable Data Analyst portfolio project: plain SQL, a small Python runner, and explicit data quality checks.
 
-> **Current status:** The full pipeline passed locally with the nine source CSVs on 24 October 2026. Raw CSVs and generated dashboard extracts are ignored by Git. The Tableau/Power BI dashboard and screenshots remain owner tasks.
+> **Current status:** The full pipeline passed locally with the nine source CSVs on 24 October 2026. A three-page local HTML dashboard is available in `dashboard/Olist_dashboard.html`. A Tableau Public workbook and screenshots remain owner tasks.
 
 ## What it answers
 
@@ -51,13 +51,13 @@ PostgreSQL 16 in Docker Compose, Python 3.11+, pandas, SQLAlchemy, psycopg 3, Sc
    make all
    ```
 
-`make all` starts PostgreSQL, reloads raw CSVs, rebuilds staging/warehouse/marts, runs data quality checks and Python analyses, writes dashboard extracts, and runs tests. A second run replaces prior derived data instead of duplicating it. If CSVs are missing, ingestion lists every missing filename. `make down` stops the database container while retaining its named volume.
+`make all` starts PostgreSQL, reloads raw CSVs, rebuilds staging/warehouse/marts, runs data quality checks and Python analyses, writes dashboard extracts, rebuilds the local dashboard, and runs tests. A second run replaces prior derived data instead of duplicating it. If CSVs are missing, ingestion lists every missing filename. `make down` stops the database container while retaining its named volume.
 
-For step-by-step work, use `make up`, `make ingest`, `make build`, `make check`, `make analyze`, `make export`, and `make test`. Open [the profiling notebook](notebooks/01_eda.ipynb) to inspect source quirks. The [data dictionary](docs/data_dictionary.md) records the observed January 2017–August 2018 analysis window and data exceptions.
+For step-by-step work, use `make up`, `make ingest`, `make build`, `make check`, `make analyze`, `make export`, `make dashboard`, and `make test`. Open [the profiling notebook](notebooks/01_eda.ipynb) to inspect source quirks. The [data dictionary](docs/data_dictionary.md) records the observed January 2017–August 2018 analysis window and data exceptions.
 
 ## Dashboard and results
 
-The [dashboard spec](dashboard/DASHBOARD_SPEC.md) maps every chart and KPI card to an extract and gives exact definitions. The [beginner Tableau guide](dashboard/TABLEAU_BEGINNER_GUIDE.md) walks through building the three pages in Tableau Public. Add screenshots to `dashboard/screenshots/` and a public link here after publishing.
+Open the [local three-page dashboard](dashboard/Olist_dashboard.html) directly in a browser. It is self-contained and filters order-based views by month and customer state. Its aggregate-only source files are in `dashboard/public_extracts/`; regenerate it with `make dashboard` after `make export`. The [dashboard spec](dashboard/DASHBOARD_SPEC.md) and [beginner Tableau guide](dashboard/TABLEAU_BEGINNER_GUIDE.md) remain available for a Tableau Public version.
 
 The verified January 2017–August 2018 window has **BRL 13.18 million delivered item revenue** across **96,211 delivered orders** (AOV **BRL 137.00**). The measured late-delivery rate is **6.8%**; **3.0%** of customers made more than one delivered purchase. See [findings](docs/findings.md) for tests, effect sizes, recommendations, and the forecast. Charts appear in `reports/figures/`.
 
@@ -79,7 +79,7 @@ The verified January 2017–August 2018 window has **BRL 13.18 million delivered
 - Repeat purchase is low in the measured window (3.0% of customers); cohort and RFM interpretations are acquisition-heavy.
 - The forecast uses a three-month holdout and a simple model; its shaded band is an approximate residual range, not a calibrated prediction interval.
 - `orders_flat.csv` assigns a multi-category order to its highest-priced item's category for order-level filtering. Use `category_performance.csv` for exact item-category revenue.
-- The dashboard and screenshots have not been built. A fresh clone needs the nine source CSVs and a running Docker daemon to reproduce these numbers.
+- The local HTML dashboard is built; a Tableau Public workbook and screenshots have not been published. A fresh clone needs the nine source CSVs and a running Docker daemon to reproduce these numbers.
 
 ## Interview guide
 

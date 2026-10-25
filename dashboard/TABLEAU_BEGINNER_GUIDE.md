@@ -2,6 +2,8 @@
 
 This guide starts after `make all` has finished. It builds the three pages in [the dashboard specification](DASHBOARD_SPEC.md) using Tableau Public in a desktop browser. You do not need to connect Tableau to PostgreSQL. Budget a few hours for a first build; save after each page.
 
+**For a public workbook, upload the seven grouped files in `dashboard/public_extracts/` instead of the row-level files in `dashboard/extracts/`.** Run `make dashboard` to generate them. The public files are `monthly_state.csv`, `delivery_bins.csv`, `review_buckets.csv`, `categories.csv`, `seller_top20.csv`, `rfm_segments.csv`, and `cohort_retention.csv`. The steps below describe the original row-level version, so its field names and calculations differ from the grouped public files. The ready-to-view three-page version is [Olist_dashboard.html](Olist_dashboard.html).
+
 ## 1. Know what you are building
 
 A **data source** is one CSV uploaded to Tableau. A **worksheet** is one chart or KPI card. A **dashboard** arranges several worksheets on a page. A **workbook** holds all the sources, worksheets, and dashboards.

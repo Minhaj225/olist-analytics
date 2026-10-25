@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Olist | Marketplace performance</title>
+<style>
+  :root{--ink:#172339;--muted:#63728a;--blue:#315eb2;--blue-pale:#e7eefb;--amber:#ce8422;--line:#dce3eb;--bg:#f5f7fa;--paper:#fff}
+  *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,Segoe UI,sans-serif}
+  header{background:#12233d;color:#fff;padding:23px max(28px,calc((100vw - 1280px)/2));display:flex;align-items:center;justify-content:space-between;gap:20px}
+  header h1{margin:0;font-size:24px;letter-spacing:-.03em}header p{margin:3px 0 0;color:#b9c9df;font-size:13px}.eyebrow{text-transform:uppercase;letter-spacing:.15em;font-size:11px;font-weight:700;color:#8fb0eb}
+  .window{border:1px solid #5a6c84;border-radius:999px;padding:8px 13px;color:#dbe7f7;font-size:12px;white-space:nowrap}
+  main{max-width:1328px;margin:auto;padding:22px 24px 56px}.nav{display:flex;gap:6px;border-bottom:1px solid var(--line);margin-bottom:20px;overflow:auto}
+  .nav button{border:0;border-bottom:3px solid transparent;background:transparent;padding:13px 18px;color:var(--muted);font:600 14px inherit;white-space:nowrap;cursor:pointer}
+  .nav button.active{color:var(--blue);border-bottom-color:var(--blue)}.nav button:focus-visible,select:focus-visible{outline:3px solid #7ea6ff;outline-offset:2px}
+  .filters{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:20px}.filters label{display:flex;gap:7px;align-items:center;color:var(--muted);font-size:13px;font-weight:600}
+  select{border:1px solid #cbd5e2;background:#fff;color:var(--ink);border-radius:7px;padding:8px 9px;font:inherit;min-width:128px}.filters small{color:var(--muted)}
+  .page{display:none}.page.active{display:block}.intro{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:0 0 17px}.intro h2{margin:0;font-size:25px;letter-spacing:-.035em}.intro p{margin:3px 0 0;color:var(--muted);font-size:13px}
+  .kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-bottom:16px}.kpi,.panel{background:var(--paper);border:1px solid var(--line);border-radius:10px;box-shadow:0 2px 8px #1e34450a}
+  .kpi{padding:18px 18px 16px;border-top:3px solid var(--blue)}.kpi.late{border-top-color:var(--amber)}.kpi span{display:block;color:var(--muted);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.055em}.kpi strong{display:block;margin-top:8px;font-size:25px;letter-spacing:-.04em;white-space:nowrap}.kpi small{color:var(--muted);font-size:11px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}.panel{padding:19px 20px;min-width:0}.panel.wide{grid-column:1/-1}.panel h3{margin:0 0 2px;font-size:16px;letter-spacing:-.015em}.sub{color:var(--muted);font-size:12px;margin:0 0 15px}.plot{min-height:240px}.plot svg{display:block;width:100%;height:250px;overflow:visible}
+  .bars{display:grid;gap:9px}.barrow{display:grid;grid-template-columns:132px 1fr 83px;align-items:center;gap:10px;font-size:12px}.barrow .name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#43536b}.track{height:10px;border-radius:20px;background:#eef2f7;overflow:hidden}.fill{height:100%;border-radius:20px;background:var(--blue)}.fill.amber{background:var(--amber)}.barrow .value{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink);font-weight:650}
+  .note{background:#eaf0f8;border-left:3px solid var(--blue);padding:12px 15px;color:#3e4d66;font-size:12px;margin:14px 0 0}.note.warn{background:#fcf2e4;border-left-color:var(--amber)}
+  table{width:100%;border-collapse:collapse;font-size:12px}th,td{padding:8px 9px;border-bottom:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums}th:first-child,td:first-child{text-align:left}th{color:var(--muted);font-weight:700;background:#f7f9fc}tbody tr:hover{background:#f7f9fc}.scroll{overflow:auto;max-height:340px}
+  .heat{border-collapse:separate;border-spacing:3px;min-width:700px}.heat td,.heat th{text-align:center;padding:7px 5px;border:0;min-width:40px}.heat th:first-child{text-align:left;min-width:90px}.heat td.empty{background:transparent!important}.heat td{border-radius:3px}.forecast{max-width:100%;max-height:290px;object-fit:contain;display:block;margin:auto}
+  footer{color:var(--muted);font-size:11px;text-align:center;margin-top:24px}button{font-family:inherit}
+  @media(max-width:900px){.kpis{grid-template-columns:repeat(3,1fr)}.grid{grid-template-columns:1fr}.panel.wide{grid-column:auto}}
+  @media(max-width:600px){header{display:block}.window{display:inline-block;margin-top:12px}.kpis{grid-template-columns:repeat(2,1fr)}.barrow{grid-template-columns:95px 1fr 72px}main{padding:16px}.panel{padding:16px}}
+</style>
+</head>
+<body>
+<header><div><div class="eyebrow">Marketplace intelligence / Olist</div><h1>Performance dashboard</h1><p>Brazilian e-commerce · Delivered item revenue excludes freight</p></div><div class="window">January 2017 — August 2018</div></header>
+<main>
+<nav class="nav" aria-label="Dashboard pages"><button data-page="executive" class="active">01&nbsp; Executive overview</button><button data-page="delivery">02&nbsp; Delivery & satisfaction</button><button data-page="customers">03&nbsp; Customers & products</button></nav>
+<div class="filters"><label>From <select id="from"></select></label><label>To <select id="to"></select></label><label>Customer state <select id="state"></select></label><small>Filters affect order, delivery, and review views. RFM, seller, cohort, and category views cover the full period.</small></div>
+<section class="page active" id="executive"><div class="intro"><div><h2>Executive overview</h2><p>Revenue, order volume, product mix, and geography</p></div></div>
+  <div class="kpis"><div class="kpi"><span>Delivered revenue</span><strong id="revenue"></strong><small>Item price, BRL</small></div><div class="kpi"><span>Delivered orders</span><strong id="orders"></strong><small>One row per order</small></div><div class="kpi"><span>Average order value</span><strong id="aov"></strong><small>Revenue / orders</small></div><div class="kpi late"><span>Late delivery rate</span><strong id="late"></strong><small id="late-denom"></small></div><div class="kpi"><span>Average review</span><strong id="review"></strong><small>Out of 5, reviewed orders</small></div></div>
+  <div class="grid"><div class="panel wide"><h3>Monthly delivered revenue</h3><p class="sub">BRL · Date and state filters apply</p><div id="monthly" class="plot"></div></div><div class="panel"><h3>Top 10 categories</h3><p class="sub">Exact item-category revenue · Full period</p><div id="categories" class="bars"></div></div><div class="panel"><h3>Revenue by state</h3><p class="sub">Top 10 customer states · Order revenue</p><div id="state-revenue" class="bars"></div></div><div class="panel wide"><h3>Three-month revenue outlook</h3><p class="sub">Static forecast; holdout MAPE 36.6% versus 43.0% seasonal naive</p><img id="forecast" class="forecast" alt="Revenue history and three-month forecast"><p class="note">The forecast does not respond to dashboard filters. Its shaded band is an approximate residual range, not a calibrated prediction interval.</p></div></div>
+  <p class="note warn">The full period contains 96,211 delivered orders. Eight lack delivery dates and are excluded from the late-rate denominator of 96,203.</p>
+</section>
+<section class="page" id="delivery"><div class="intro"><div><h2>Delivery & satisfaction</h2><p>Where delays occur and how customers rate their experience</p></div></div><div class="grid">
+  <div class="panel"><h3>Late rate by state</h3><p class="sub">Late orders / known-lateness orders · Top 12 by delivered volume</p><div id="state-late" class="bars"></div></div>
+  <div class="panel"><h3>Delivery days distribution</h3><p class="sub">Five-day bins · 80+ days combined · Known delivery dates</p><div id="histogram" class="plot"></div></div>
+  <div class="panel"><h3>Review by lateness</h3><p class="sub">Mean review score · Unknown dates retained</p><div id="review-buckets" class="bars"></div></div>
+  <div class="panel"><h3>Seller scorecard</h3><p class="sub">Top 20 sellers by revenue · IDs removed · Full period</p><div class="scroll"><table><thead><tr><th>Rank</th><th>Orders</th><th>Revenue</th><th>Late %</th><th>Review</th></tr></thead><tbody id="sellers"></tbody></table></div></div></div>
+  <p class="note">Seller results are fixed to the full analysis window and do not change with state or date filters. Delivery and review differences are associations, not proof of cause.</p>
+</section>
+<section class="page" id="customers"><div class="intro"><div><h2>Customers & products</h2><p>Customer mix, repeat activity, and category concentration</p></div></div><div class="grid">
+  <div class="panel"><h3>Customers by RFM segment</h3><p class="sub">Distinct customers · Full period</p><div id="rfm-customers" class="bars"></div></div>
+  <div class="panel"><h3>Revenue share by RFM segment</h3><p class="sub">Share of delivered customer revenue · Full period</p><div id="rfm-revenue" class="bars"></div></div>
+  <div class="panel wide"><h3>Cohort retention</h3><p class="sub">Share of original cohort active in month offset · Blank means unobserved</p><div class="scroll"><table id="cohort" class="heat"></table></div></div>
+  <div class="panel wide"><div class="intro"><div><h3>Category Pareto</h3><p class="sub">Top 20 categories shown; cumulative share uses all categories in the selected year</p></div><label>Year <select id="year"></select></label></div><div id="pareto" class="plot"></div></div></div>
+  <p class="note">Only 3.0% of customers made more than one delivered purchase in this analysis window. RFM labels describe observed behaviour, not confirmed churn.</p>
+</section>
+<footer>Source: Olist public dataset · Aggregate-only dashboard · Built from the project’s verified January 2017–August 2018 extracts</footer>
+</main>
+<script id="dashboard-data" type="application/json">__DASHBOARD_DATA__</script>
+<script>
+const D=JSON.parse(document.getElementById('dashboard-data').textContent);
+const $=id=>document.getElementById(id), n=x=>Number(x)||0;
+const fmt=x=>Math.round(x).toLocaleString('en-US'), money=x=>'BRL '+Number(x).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}), pct=x=>(x*100).toFixed(1)+'%';
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const months=[...new Set(D.monthly_state.map(r=>r.month))].sort(), states=[...new Set(D.monthly_state.map(r=>r.customer_state))].sort();
+for(const id of ['from','to']) $(id).innerHTML=months.map(m=>`<option value="${m}">${m.slice(0,7)}</option>`).join('');
+$('to').value=months.at(-1);$('state').innerHTML='<option value="">All states</option>'+states.map(s=>`<option>${s}</option>`).join('');
+$('year').innerHTML=[...new Set(D.categories.map(r=>r.year))].sort().reverse().map(y=>`<option>${y}</option>`).join('');
+$('forecast').src='__FORECAST_IMAGE__';
+function filtered(rows){return rows.filter(r=>r.month>=$('from').value&&r.month<=$('to').value&&(!$('state').value||r.customer_state===$('state').value))}
+function group(rows,key,value){const m=new Map();for(const r of rows)m.set(r[key],(m.get(r[key])||0)+n(r[value]));return [...m].map(([label,value])=>({label,value}))}
+function bars(id,items,format,max=10,color='blue'){const top=items.slice(0,max), scale=Math.max(1,...top.map(x=>x.value));$(id).innerHTML=top.map(x=>`<div class="barrow"><span class="name" title="${esc(x.label)}">${esc(x.label.replaceAll('_',' '))}</span><div class="track"><div class="fill ${color}" style="width:${Math.max(1,x.value/scale*100)}%"></div></div><span class="value">${format(x.value)}</span></div>`).join('')||'<p>No records for these filters.</p>'}
+function chart(id,items,kind='line',color='#315eb2'){let values=items.map(x=>x.value), max=Math.max(1,...values), w=940,h=250,left=55,right=12,top=14,bottom=38,cw=w-left-right,ch=h-top-bottom;
+  let ticks=[0,.25,.5,.75,1].map(t=>`<line x1="${left}" y1="${top+ch*(1-t)}" x2="${w-right}" y2="${top+ch*(1-t)}" stroke="#e6ebf2"/><text x="${left-8}" y="${top+ch*(1-t)+4}" text-anchor="end" fill="#66758a" font-size="11">${fmt(max*t)}</text>`).join('');
+  let marks=kind==='line'?`<polyline fill="none" stroke="${color}" stroke-width="3" points="${items.map((x,i)=>`${left+(i+.5)*cw/items.length},${top+ch*(1-x.value/max)}`).join(' ')}"/>`+items.map((x,i)=>`<circle cx="${left+(i+.5)*cw/items.length}" cy="${top+ch*(1-x.value/max)}" r="3" fill="${color}"><title>${esc(x.label)}: ${fmt(x.value)}</title></circle>`).join(''):items.map((x,i)=>`<rect x="${left+i*cw/items.length+1}" y="${top+ch*(1-x.value/max)}" width="${Math.max(2,cw/items.length-2)}" height="${ch*x.value/max}" fill="${color}"><title>${esc(x.label)}: ${fmt(x.value)}</title></rect>`).join('');
+  let labels=items.map((x,i)=>i%Math.max(1,Math.ceil(items.length/7))===0?`<text x="${left+(i+.5)*cw/items.length}" y="${h-11}" text-anchor="middle" fill="#66758a" font-size="11">${esc(x.label.slice(0,7))}</text>`:'').join('');
+  $(id).innerHTML=`<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(id.replaceAll('-',' '))}">${ticks}${marks}${labels}</svg>`}
+function update(){const a=filtered(D.monthly_state),sum=k=>a.reduce((v,r)=>v+n(r[k]),0),revenue=sum('revenue'),orders=sum('orders'),known=sum('known_lateness_orders');
+  $('revenue').textContent=money(revenue);$('orders').textContent=fmt(orders);$('aov').textContent=orders?'BRL '+(revenue/orders).toFixed(2):'—';$('late').textContent=known?pct(sum('late_orders')/known):'—';$('late-denom').textContent=fmt(known)+' known dates';$('review').textContent=sum('review_count')?(sum('review_sum')/sum('review_count')).toFixed(2)+' / 5':'—';
+  chart('monthly',months.filter(m=>m>=$('from').value&&m<=$('to').value).map(m=>({label:m,value:a.filter(r=>r.month===m).reduce((v,r)=>v+n(r.revenue),0)})));
+  bars('state-revenue',group(a,'customer_state','revenue').sort((x,y)=>y.value-x.value),money);
+  let state=new Map();for(const r of a){let v=state.get(r.customer_state)||{label:r.customer_state,late:0,known:0,orders:0};v.late+=n(r.late_orders);v.known+=n(r.known_lateness_orders);v.orders+=n(r.orders);state.set(v.label,v)}
+  bars('state-late',[...state.values()].sort((x,y)=>y.orders-x.orders).map(x=>({label:x.label,value:x.known?x.late/x.known:0})),pct,12,'amber');
+  const bins=group(filtered(D.delivery_bins),'days_bin','orders').sort((x,y)=>n(x.label)-n(y.label)).map(x=>({label:x.label==80?'80+':x.label+'–'+(n(x.label)+4),value:x.value}));chart('histogram',bins,'bar','#ce8422');
+  const order=['Early','On time','1–3 days late','4+ days late','Unknown'],revs=filtered(D.review_buckets);bars('review-buckets',order.map(label=>{let rows=revs.filter(r=>r.lateness_bucket===label),count=rows.reduce((v,r)=>v+n(r.review_count),0);return {label,value:count?rows.reduce((v,r)=>v+n(r.review_sum),0)/count:0}}),x=>x?x.toFixed(2)+' / 5':'—',5,'amber')}
+function fixed(){let cats=group(D.categories,'category','revenue').sort((a,b)=>b.value-a.value);bars('categories',cats,money);
+  let rfm=D.rfm_segments.slice().sort((a,b)=>b.customers-a.customers),total=rfm.reduce((v,r)=>v+n(r.revenue),0);bars('rfm-customers',rfm.map(r=>({label:r.segment,value:r.customers})),fmt,10);bars('rfm-revenue',rfm.map(r=>({label:r.segment,value:r.revenue/total})),pct,10);
+  $('sellers').innerHTML=D.seller_top20.map(r=>`<tr><td>#${r.seller_rank}</td><td>${fmt(r.orders)}</td><td>${money(r.revenue)}</td><td>${n(r.late_pct).toFixed(1)}%</td><td>${r.avg_review_score==null?'—':n(r.avg_review_score).toFixed(2)}</td></tr>`).join('');
+  let cohorts=[...new Set(D.cohort_retention.map(r=>r.cohort_month))].sort(),offsets=[...new Set(D.cohort_retention.map(r=>r.months_since_first))].sort((a,b)=>a-b),lookup=new Map(D.cohort_retention.map(r=>[r.cohort_month+'|'+r.months_since_first,r.retention_rate]));$('cohort').innerHTML='<thead><tr><th>Cohort</th>'+offsets.map(i=>`<th>${i}</th>`).join('')+'</tr></thead><tbody>'+cohorts.map(c=>'<tr><th>'+c.slice(0,7)+'</th>'+offsets.map(i=>{let v=lookup.get(c+'|'+i);return v==null?'<td class="empty"></td>':`<td style="background:rgba(49,94,178,${.08+Math.min(.82,Math.sqrt(v)*.82)})" title="${pct(v)}">${pct(v)}</td>`}).join('')+'</tr>').join('')+'</tbody>';pareto()}
+function pareto(){let rows=D.categories.filter(r=>String(r.year)===$('year').value).sort((a,b)=>a.revenue_rank-b.revenue_rank).slice(0,20),max=Math.max(...rows.map(r=>n(r.revenue))),w=940,h=280,l=42,t=15,b=63,cw=w-l-10,ch=h-t-b;
+  let columns=rows.map((r,i)=>{let x=l+i*cw/rows.length+2,bh=ch*n(r.revenue)/max;return `<rect x="${x}" y="${t+ch-bh}" width="${Math.max(2,cw/rows.length-4)}" height="${bh}" fill="#315eb2"><title>${esc(r.category)}: ${money(r.revenue)}</title></rect>`}).join('');
+  let line=rows.map((r,i)=>`${l+(i+.5)*cw/rows.length},${t+ch*(1-n(r.cumulative_revenue_share))}`).join(' '),labels=rows.map((r,i)=>i%4===0?`<text x="${l+(i+.5)*cw/rows.length}" y="${h-27}" transform="rotate(-35 ${l+(i+.5)*cw/rows.length} ${h-27})" text-anchor="end" fill="#66758a" font-size="10">${esc(r.category.replaceAll('_',' ').slice(0,12))}</text>`:'').join('');
+  $('pareto').innerHTML=`<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="Category revenue bars and cumulative revenue share line"><line x1="${l}" y1="${t+ch}" x2="${w-10}" y2="${t+ch}" stroke="#cbd5e2"/>${columns}<polyline points="${line}" fill="none" stroke="#ce8422" stroke-width="3"/>${labels}<text x="${w-10}" y="${t+13}" text-anchor="end" fill="#ce8422" font-size="12">Cumulative ${pct(rows.at(-1).cumulative_revenue_share)}</text></svg>`}
+document.querySelectorAll('.nav button').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('.nav button,.page').forEach(el=>el.classList.remove('active'));button.classList.add('active');$(button.dataset.page).classList.add('active')}));
+for(const id of ['from','to','state'])$(id).addEventListener('change',()=>{if($('from').value>$('to').value){if(id==='from')$('to').value=$('from').value;else $('from').value=$('to').value}update()});$('year').addEventListener('change',pareto);
+fixed();update();
+</script>
+</body>
+</html>

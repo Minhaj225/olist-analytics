@@ -1,6 +1,6 @@
 PYTHON ?= python
 
-.PHONY: up down ingest build check analyze export test all
+.PHONY: up down ingest build check analyze export dashboard test all
 up:
 	docker compose up -d --wait
 	$(PYTHON) -m src.db
@@ -19,6 +19,9 @@ analyze:
 	$(PYTHON) -m src.analysis.forecast
 export:
 	$(PYTHON) -m src.export_extracts
+dashboard:
+	$(PYTHON) dashboard/build_public_extracts.py
+	$(PYTHON) dashboard/build_dashboard.py
 test:
 	$(PYTHON) -m pytest -q
-all: up ingest build check analyze export test
+all: up ingest build check analyze export dashboard test
